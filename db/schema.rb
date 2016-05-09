@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509204017) do
+ActiveRecord::Schema.define(version: 20160509204754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,21 @@ ActiveRecord::Schema.define(version: 20160509204017) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "character_classes", force: :cascade do |t|
+    t.string   "name"
+    t.string   "armor_type"
+    t.boolean  "prestige"
+    t.text     "entry_requirements"
+    t.integer  "fortitude_index"
+    t.integer  "strength_index"
+    t.integer  "mana_index"
+    t.integer  "swiftness_index"
+    t.integer  "intuition_index"
+    t.text     "flavor_text"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "races", force: :cascade do |t|
