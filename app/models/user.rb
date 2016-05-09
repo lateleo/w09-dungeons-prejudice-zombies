@@ -7,6 +7,6 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_many: :campaigns
-#  has_many: :characters
+  has_many: :campaign_characters through: :campaigns, model: :characters
 
 end

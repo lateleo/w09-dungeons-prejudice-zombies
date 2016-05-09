@@ -6,6 +6,8 @@ class Race < ActiveRecord::Base
   validate :validate_indices
   before_validation :set_adjective
 
+  has_many :racial_bonuses
+
   def validate_indices
     sum = fortitude_index + strength_index + mana_index + swiftness_index + intuition_index
     errors.add(:stat_indices, "must add up to 0.") if sum != 0
