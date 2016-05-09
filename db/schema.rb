@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509204754) do
+ActiveRecord::Schema.define(version: 20160509210352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,21 @@ ActiveRecord::Schema.define(version: 20160509204754) do
     t.integer  "swiftness_index"
     t.integer  "intuition_index"
     t.text     "flavor_text"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.integer  "character_id"
+    t.integer  "char_class_id"
+    t.integer  "character_level"
+    t.integer  "class_level"
+    t.integer  "ability_id"
+    t.integer  "fortitude_increase"
+    t.integer  "strength_increase"
+    t.integer  "mana_increase"
+    t.integer  "swiftness_increase"
+    t.integer  "intuition_increase"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end

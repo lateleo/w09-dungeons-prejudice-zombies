@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  character_id: 1
+  char_class_id: 1
+  character_level: 1
+  class_level: 1
+  ability_id: 1
+  fortitude_increase: 1
+  strength_increase: 1
+  mana_increase: 1
+  swiftness_increase: 1
+  intuition_increase: 1
+
+two:
+  character_id: 1
+  char_class_id: 1
+  character_level: 1
+  class_level: 1
+  ability_id: 1
+  fortitude_increase: 1
+  strength_increase: 1
+  mana_increase: 1
+  swiftness_increase: 1
+  intuition_increase: 1

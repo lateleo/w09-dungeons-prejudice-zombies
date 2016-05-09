@@ -5,6 +5,7 @@ class CharacterClass < ActiveRecord::Base
   validate :validate_entry_requirements
 
   has_and_belongs_to_many :abilities
+  has_many :levels, as: :char_class
 
   def validate_indices
     sum = fortitude_index + strength_index + mana_index + swiftness_index + intuition_index
