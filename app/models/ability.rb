@@ -4,5 +4,6 @@ class Ability < ActiveRecord::Base
   validates :in_game_effect, presence: true
 
   has_many :levels
+  has_many :characters, through: :levels
   has_and_belongs_to_many :character_classes
 end

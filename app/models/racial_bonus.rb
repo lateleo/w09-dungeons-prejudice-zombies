@@ -5,4 +5,5 @@ class RacialBonus < ActiveRecord::Base
   validates :in_game_effect, presence: true
 
   belongs_to :race
+  has_many :characters
 end

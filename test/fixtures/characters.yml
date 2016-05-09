@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  age: 1
+  race_id: 1
+  racial_bonus_id: 1
+  fortitude_offset: 1
+  strength_offset: 1
+  mana_offset: 1
+  swiftness_offset: 1
+  intuition_offset: 1
+  campaign_id: 1
+  user_id: 1
+
+two:
+  name: MyString
+  age: 1
+  race_id: 1
+  racial_bonus_id: 1
+  fortitude_offset: 1
+  strength_offset: 1
+  mana_offset: 1
+  swiftness_offset: 1
+  intuition_offset: 1
+  campaign_id: 1
+  user_id: 1

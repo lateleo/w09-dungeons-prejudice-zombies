@@ -6,6 +6,7 @@ class CharacterClass < ActiveRecord::Base
 
   has_and_belongs_to_many :abilities
   has_many :levels, as: :char_class
+  has_many :characters, through: :levels
 
   def validate_indices
     sum = fortitude_index + strength_index + mana_index + swiftness_index + intuition_index
