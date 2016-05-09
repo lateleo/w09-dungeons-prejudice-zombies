@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cooldown: MyString
+  in_game_effect: MyText
+  flavor_text: MyText
+
+two:
+  name: MyString
+  cooldown: MyString
+  in_game_effect: MyText
+  flavor_text: MyText
