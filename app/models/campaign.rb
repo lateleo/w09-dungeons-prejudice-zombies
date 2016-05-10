@@ -5,4 +5,10 @@ class Campaign < ActiveRecord::Base
 
   belongs_to: :user
   has_many: :characters
+
+  private
+
+  def campaign_params
+    params.require(:campaign).permit(:name, :user_id, :description)
+  end
 end

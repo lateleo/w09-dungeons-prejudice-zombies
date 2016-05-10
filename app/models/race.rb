@@ -24,4 +24,12 @@ class Race < ActiveRecord::Base
     1.step(by: 1, to: incr_per_15) {|i| levels.push( ((i * 15.0)/6).ceil)}
     levels
   end
+
+  private
+
+  def race_params
+    params.require(:race).permit(:plural, :singular, :adjective, :age_of_maturity,
+      :fortitude_index, :strength_index, :mana_index, :swiftness_index, :intuition_index,
+      :description)
+  end
 end

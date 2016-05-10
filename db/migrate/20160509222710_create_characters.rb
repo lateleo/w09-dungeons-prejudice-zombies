@@ -12,7 +12,7 @@ class CreateCharacters < ActiveRecord::Migration
       t.integer :mana_offset
       t.integer :swiftness_offset
       t.integer :intuition_offset
-      t.text :description
+      t.text :backstory
 
       t.timestamps null: false
     end

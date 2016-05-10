@@ -30,4 +30,11 @@ class Level < ActiveRecord::Base
     end
   end
 
+  private
+
+  def level_params
+    params.require(:level).permit(:character_id, :char_class_id, :character_level,
+      :class_level, :ability_id, :fortitude_increase, :strength_increase, :mana_increase,
+      :swiftness_increase, :intuition_increase)
+  end
 end

@@ -20,4 +20,11 @@ class CharacterClass < ActiveRecord::Base
       errors.add(:entry_requirements, "are not allowed for Base Classes.")
     end
   end
+
+  private
+
+  def character_class_params
+    params.require(:character_class).permit(:name, :armor_type, :prestige, :entry_requirements,
+      :fortitude_index, :strength_index, :mana_index, :swiftness_index, :intuition_index, :flavor_text)
+  end
 end

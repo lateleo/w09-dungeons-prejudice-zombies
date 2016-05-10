@@ -6,4 +6,10 @@ class Ability < ActiveRecord::Base
   has_many :levels
   has_many :characters, through: :levels
   has_and_belongs_to_many :character_classes
+
+  private
+
+  def ability_params
+    params.require(:ability).permit.(:name, :cooldown, :in_game_effect, :flavor_text)
+  end
 end
