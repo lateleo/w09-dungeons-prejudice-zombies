@@ -11,9 +11,4 @@ class User < ActiveRecord::Base
   has_many: :campaign_characters through: :campaigns, model: :characters
 
 
-  private
-
-  def user_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation)
-  end
 end
