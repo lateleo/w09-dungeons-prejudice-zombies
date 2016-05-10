@@ -4,17 +4,20 @@ class UserController < ApplicationController
   end
 
   def create
-    if @user = login(params[:email], params[:password])
-      redirect_back_or_to(:users, notice: 'Login successful')
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to users_path, notice: "User saved."
     else
-      flash.now[:alert] = 'Login failed'
-      render action: 'new'
+      render :new
     end
   end
 
-  def destroy
-    logout
-    redirect_to(:users, notice: 'Logged out!')
+  def show
+    @user = User.find(params['id'])
+  end
+
+  def index
+    @users = User.all
   end
 
 
