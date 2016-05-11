@@ -2,9 +2,8 @@
 
 one:
   character_id: 1
-  char_class_id: 1
+  class_id: 1
   character_level: 1
-  class_level: 1
   ability_id: 1
   fortitude_increase: 1
   strength_increase: 1
@@ -14,9 +13,8 @@ one:
 
 two:
   character_id: 1
-  char_class_id: 1
+  class_id: 1
   character_level: 1
-  class_level: 1
   ability_id: 1
   fortitude_increase: 1
   strength_increase: 1

@@ -11,7 +11,7 @@ one:
   swiftness_offset: 1
   intuition_offset: 1
   campaign_id: 1
-  user_id: 1
+  player_id: 1
 
 two:
   name: MyString
@@ -24,4 +24,4 @@ two:
   swiftness_offset: 1
   intuition_offset: 1
   campaign_id: 1
-  user_id: 1
+  player_id: 1
