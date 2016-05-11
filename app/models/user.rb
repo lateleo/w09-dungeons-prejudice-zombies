@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
   validates :email, presence: true, uniqueness: {case_sensitive: false}
 
-  has_many: :campaigns
-  has_many: :player_characters, model: :characters
-  has_many: :campaign_characters through: :campaigns, model: :characters
+  has_many :campaigns, as: :dungeon_master
+  has_many :player_characters, model: :characters
+  has_many :campaign_characters through: :campaigns, model: :characters
 
 
 end

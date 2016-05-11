@@ -3,8 +3,8 @@ class Campaign < ActiveRecord::Base
   validates :user_id, presence: true
   validates :description, presence: true
 
-  belongs_to: :user
-  has_many: :characters
+  belongs_to :dungeon_master, class_name: "User"
+  has_many :characters
 
   private
 
