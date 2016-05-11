@@ -5,7 +5,7 @@ class CharacterClass < ActiveRecord::Base
   validate :validate_entry_requirements
 
   has_and_belongs_to_many :abilities
-  has_many :levels, as: :char_class
+  has_many :levels, inverse_of: :char_class, foreign_key: "class_id"
   has_many :characters, through: :levels
 
   def validate_indices

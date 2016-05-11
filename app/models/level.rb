@@ -1,13 +1,13 @@
 class Level < ActiveRecord::Base
   validates :character_id, presence: true
-  validates :char_class_id, presence: true
+  validates :class_id, presence: true
   validates :character_level, presence: true
   validates :class_level, presence: true
   validates :ability_id, presence: true
   validate :validate_increases
 
   belongs_to :character
-  belongs_to :char_class, model: :character_class
+  belongs_to :char_class, class_name: "CharacterClass", foreign_key: "class_id"
   belongs_to :ability
 
   def validate_increases

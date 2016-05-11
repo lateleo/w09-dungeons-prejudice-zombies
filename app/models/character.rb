@@ -1,8 +1,7 @@
 class Character < ActiveRecord::Base
   validates :name, presence: true
   validates :age, presence: true
-  validates :campaign_id, presence: true
-  validates :user_id, presence: true
+  validates :player_id, presence: true
   validates :race_id, presence: true
   validates :racial_bonus_id, presence: true
   validates :fortitude_offset, presence: true

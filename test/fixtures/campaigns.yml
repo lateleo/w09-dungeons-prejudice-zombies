@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  user_id: 1
+  dm_id: 1
   description: MyText
 
 two:
   name: MyString
-  user_id: 1
+  dm_id: 1
   description: MyText
