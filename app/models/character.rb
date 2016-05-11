@@ -57,5 +57,5 @@ class Character < ActiveRecord::Base
     params.require(:character).permit(:name, :age, :campaign_id, :user_id, :race_id,
       :racial_bonus_id, :fortitude_offset, :strength_offset, :mana_offset, :swiftness_offset,
       :backstory)
-
+  end
 end
