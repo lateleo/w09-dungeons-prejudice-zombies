@@ -1,9 +1,9 @@
 class Level < ActiveRecord::Base
   validates :character_id, presence: true
   validates :class_id, presence: true
-  validates :character_level, presence: true
+  validates :character_level, presence: true, uniqueness: {scope: :character_id}
   validates :class_level, presence: true
-  validates :ability_id, presence: true
+  validates :ability_id, presence: true, uniqueness: {scope: :character_id}
   validate :validate_increases
 
   belongs_to :character
@@ -33,8 +33,8 @@ class Level < ActiveRecord::Base
   private
 
   def level_params
-    params.require(:level).permit(:character_id, :char_class_id, :character_level,
-      :class_level, :ability_id, :fortitude_increase, :strength_increase, :mana_increase,
+    params.require(:level).permit(:character_id, :class_id, :character_level,
+      :ability_id, :fortitude_increase, :strength_increase, :mana_increase,
       :swiftness_increase, :intuition_increase)
   end
 end

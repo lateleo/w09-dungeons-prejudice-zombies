@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511184833) do
+ActiveRecord::Schema.define(version: 20160511191025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,13 +73,13 @@ ActiveRecord::Schema.define(version: 20160511184833) do
     t.text     "backstory"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "base_level_id"
   end
 
   create_table "levels", force: :cascade do |t|
     t.integer  "character_id"
-    t.integer  "char_class_id"
+    t.integer  "class_id"
     t.integer  "character_level"
-    t.integer  "class_level"
     t.integer  "ability_id"
     t.integer  "fortitude_increase"
     t.integer  "strength_increase"

@@ -12,8 +12,10 @@ class Character < ActiveRecord::Base
 
   belongs_to :race
   belongs_to :racial_bonus
+
+  has_one :base_level, class_name: "Level", inverse_of: :base_character
   has_many :levels
-  has_many :character_classes, through: :levels
+  has_many :char_classes, through: :levels, class_name: "CharacterClass"
   has_many :abilities, through: :levels
 
   def fortitude
@@ -58,4 +60,5 @@ class Character < ActiveRecord::Base
       :racial_bonus_id, :fortitude_offset, :strength_offset, :mana_offset, :swiftness_offset,
       :backstory)
 
+  end
 end
