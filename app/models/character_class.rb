@@ -1,5 +1,5 @@
 class CharacterClass < ActiveRecord::Base
-  validates :name
+  validates :name, presence: true
   validates :armor_type
   validate :validate_indices
   validate :validate_entry_requirements
