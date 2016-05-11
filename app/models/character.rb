@@ -53,6 +53,14 @@ class Character < ActiveRecord::Base
     end
   end
 
+  def char_levels
+    self.levels.size - 1
+  end
+
+  def class_levels(class_id)
+    self.levels.where(class_id: class_id).size
+  end
+
   private
 
   def character_params
