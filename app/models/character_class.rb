@@ -1,6 +1,6 @@
 class CharacterClass < ActiveRecord::Base
   validates :name, presence: true
-  validates :armor_type
+  validates :armor_type, presence: true
   validate :validate_indices
   validate :validate_entry_requirements
 

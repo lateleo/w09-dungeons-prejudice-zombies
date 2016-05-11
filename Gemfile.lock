@@ -76,6 +76,8 @@ GEM
     mime-types-data (3.2016.0221)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
+    minitest-rg (5.2.0)
+      minitest (~> 5.0)
     multi_json (1.12.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -163,6 +165,7 @@ DEPENDENCIES
   byebug
   jbuilder (~> 2.0)
   jquery-rails
+  minitest-rg
   pg (~> 0.15)
   rails (= 4.2.6)
   sass-rails (~> 5.0)

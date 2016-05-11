@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  race_id: 1
-  cooldown: MyString
-  in_game_effect: MyText
-  flavor_text: MyText
+# one:
+#   name: MyString
+#   race_id: 1
+#   cooldown: MyString
+#   in_game_effect: MyText
+#   flavor_text: MyText
 
-two:
-  name: MyString
-  race_id: 1
-  cooldown: MyString
-  in_game_effect: MyText
-  flavor_text: MyText
+#two:
+#  name: MyString
+#  race_id: 1
+#  cooldown: MyString
+#  in_game_effect: MyText
+#  flavor_text: MyText
