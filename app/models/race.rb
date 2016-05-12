@@ -5,7 +5,6 @@ class Race < ActiveRecord::Base
 
   validates_with UniversalValidator
   validates :singular, presence: true
-  validates :adjective, presence: true
   validates :age_of_maturity, presence: true
   validate :validate_indices
   before_validation :set_adjective
@@ -16,9 +15,11 @@ class Race < ActiveRecord::Base
   def validate_indices
     sum = 0
     stats.each do |stat|
-      sum += self.send("#{stat}_index")
-      if self.send("#{stat}_index") >= 3 || self.send("#{stat}_index") <= -3
-        erros.add(:"#{stat}_index", "must be between -3 and 3 inclusive.")
+      sum += self.send("#{stat}_index").to_i
+      if self.send("#{stat}_index") == nil
+        errors.add(:"#{stat}_index", "cannot be blank.")
+      elsif self.send("#{stat}_index") >= 3 || self.send("#{stat}_index") <= -3
+        errors.add(:"#{stat}_index", "must be between -3 and 3 inclusive.")
       end
     end
     errors.add(:stat_indices, "must add up to 8.") if sum != 0
@@ -28,10 +29,10 @@ class Race < ActiveRecord::Base
     self.adjective = self.singular if self.adjective == nil
   end
 
-  def increase_levels(stat_index)
-    incr_per_15 = 6 + stat_index
+  def increase_levels_for(stat)
+    incr_per_15 = 6 + self.send("#{stat}_index")
     levels = []
-    1.step(by: 1, to: incr_per_15) {|i| levels.push( ((i * 15.0)/6).ceil)}
+    1.step(by: 1, to: incr_per_15) {|i| levels.push((i * (15.0/incr_per_15)).ceil)}
     levels
   end
 

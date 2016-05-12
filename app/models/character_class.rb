@@ -16,8 +16,10 @@ class CharacterClass < ActiveRecord::Base
   def validate_indices
     sum = 0
     stats.each do |stat|
-      sum += self.send("#{stat}_index")
-      if self.send("#{stat}_index") >= 4 || self.send("#{stat}_index") <= 0
+      sum += self.send("#{stat}_index").to_i
+      if self.send("#{stat}_index") == nil
+        errors.add(:"#{stat}_index", "cannot be blank.")
+      elsif self.send("#{stat}_index") >= 4 || self.send("#{stat}_index") <= 0
         erros.add(:"#{stat}_index", "must be between 0 and 4 inclusive.")
       end
     end

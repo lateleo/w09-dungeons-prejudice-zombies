@@ -17,7 +17,7 @@ class Level < ActiveRecord::Base
   end
 
   def racial_increase_for(stat)
-    increase_values = self.character.race.send("#{stat}_index")
+    increase_values = self.character.race.send(:increase_levels_for, stat)
     adjusted_level = ((self.character_level + self.character.send("#{stat}_offset") - 1) % 15) + 1
     increase_values.include?(adjusted_level) ? 1 : 0
   end
