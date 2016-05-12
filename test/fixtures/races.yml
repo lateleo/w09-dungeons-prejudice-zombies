@@ -1,25 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   plural: MyString
-#   singular: MyString
-#   adjective: MyString
-#   age_of_maturity: 1
-#   fortitude_index: 1
-#   strength_index: 1
-#   mana_index: 1
-#   swiftness_index: 1
-#   intuition_index: 1
-#   description: MyText
-#
-# two:
-#   plural: MyString
-#   singular: MyString
-#   adjective: MyString
-#   age_of_maturity: 1
-#   fortitude_index: 1
-#   strength_index: 1
-#   mana_index: 1
-#   swiftness_index: 1
-#   intuition_index: 1
-#   description: MyText
+one:
+  name: "Humans"
+  singular: "Human"
+  adjective: "Human"
+  age_of_maturity: 18
+  fortitude_index: 0
+  strength_index: 0
+  mana_index: 0
+  swiftness_index: 0
+  intuition_index: 0
+  description: nil
+  created_at: "2016-05-12 22:16:59"
+  updated_at: "2016-05-12 22:16:59"

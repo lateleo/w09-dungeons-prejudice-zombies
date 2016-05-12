@@ -1,25 +1,31 @@
 # # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 #
-# one:
-#   name: MyString
-#   armor_type: MyString
-#   fortitude_index: 1
-#   strength_index: 1
-#   mana_index: 1
-#   swiftness_index: 1
-#   intuition_index: 1
-#   prestige: false
-#   entry_requirements: MyText
-#   flavor_text: MyText
-#
-# two:
-#   name: MyString
-#   armor_type: MyString
-#   fortitude_index: 1
-#   strength_index: 1
-#   mana_index: 1
-#   swiftness_index: 1
-#   intuition_index: 1
-#   prestige: false
-#   entry_requirements: MyText
-#   flavor_text: MyText
+one:
+  name: "Paladin"
+  armor_type: "Heavy"
+  fortitude_index: 1
+  strength_index: 4
+  mana_index: 3
+  swiftness_index: 0
+  intuition_index: 0
+  prestige: false
+  entry_requirements: nil
+  flavor_text: nil
+  created_at: "2016-05-12 22:16:59"
+  updated_at: "2016-05-12 22:16:59"
+
+
+
+two:
+  name: "Vanguard"
+  armor_type: "Medium"
+  fortitude_index: 0
+  strength_index: 3
+  mana_index: 3
+  swiftness_index: 1
+  intuition_index: 1
+  prestige: true
+  entry_requirements: "Character Level: 6/r/nStrength: 18/r/nMana: 18/r/nSwiftness: 15/r/nAbilities: Zeal, 1 Zeal-generator and 1 Zeal-consumer"
+  flavor_text: nil
+  created_at: "2016-05-12 22:16:59"
+  updated_at: "2016-05-12 22:16:59"

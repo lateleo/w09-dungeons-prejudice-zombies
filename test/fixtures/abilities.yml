@@ -1,13 +1,18 @@
 # # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 #
-# one:
-#   name: MyString
-#   cooldown: MyString
-#   in_game_effect: MyText
-#   flavor_text: MyText
-#
-# two:
-#   name: MyString
-#   cooldown: MyString
-#   in_game_effect: MyText
-#   flavor_text: MyText
+one:
+  name: "Crusader Strike"
+  cooldown: "1 round"
+  in_game_effect: "Generates Zeal and strikes the target."
+  flavor_text: nil
+  created_at: "2016-05-12 22:16:59"
+  updated_at: "2016-05-12 22:16:59"
+
+
+two:
+  name: "Smite"
+  cooldown: "2 rounds"
+  in_game_effect: "Consumes Zeal, smites the target."
+  flavor_text: nil
+  created_at: "2016-05-12 22:16:59"
+  updated_at: "2016-05-12 22:16:59"

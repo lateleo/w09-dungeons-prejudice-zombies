@@ -1,15 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   name: MyString
-#   race_id: 1
-#   cooldown: MyString
-#   in_game_effect: MyText
-#   flavor_text: MyText
-
-#two:
-#  name: MyString
-#  race_id: 1
-#  cooldown: MyString
-#  in_game_effect: MyText
-#  flavor_text: MyText
+one:
+  name: "Sheer Luck"
+  race_id: 1
+  cooldown: "1 day"
+  in_game_effect: "Pick any die roll that affects you, roll it twice, and choose one as the result."
+  flavor_text: nil
+  created_at: "2016-05-12 22:16:59"
+  updated_at: "2016-05-12 22:16:59"
+  

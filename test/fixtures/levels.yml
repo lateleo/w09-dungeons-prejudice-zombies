@@ -1,23 +1,28 @@
-# # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-#
-# one:
-#   character_id: 1
-#   class_id: 1
-#   character_level: 1
-#   ability_id: 1
-#   fortitude_increase: 1
-#   strength_increase: 1
-#   mana_increase: 1
-#   swiftness_increase: 1
-#   intuition_increase: 1
-#
-# two:
-#   character_id: 1
-#   class_id: 1
-#   character_level: 1
-#   ability_id: 1
-#   fortitude_increase: 1
-#   strength_increase: 1
-#   mana_increase: 1
-#   swiftness_increase: 1
-#   intuition_increase: 1
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+zero:
+  character_id: 1
+  class_id: 0
+  character_level: 0
+  ability_id: 1
+  fortitude_increase: 12
+  strength_increase: 14
+  mana_increase: 13
+  swiftness_increase: 11
+  intuition_increase: 10
+  created_at: "2016-05-12 22:16:59"
+  updated_at: "2016-05-12 22:16:59"
+
+
+one:
+  character_id: 1
+  class_id: 1
+  character_level: 1
+  ability_id: 2
+  fortitude_increase: 1
+  strength_increase: 1
+  mana_increase: 1
+  swiftness_increase: 1
+  intuition_increase: 1
+  created_at: "2016-05-12 22:16:59"
+  updated_at: "2016-05-12 22:16:59"

@@ -1,5 +1,7 @@
+require File.expand_path('../../helpers/application_helper', __FILE__)
+
 class Character < ActiveRecord::Base
-  validates :name, presence: true
+  validates_with UniversalValidator
   validates :age, presence: true
   validates :player_id, presence: true
   validates :race_id, presence: true
@@ -58,7 +60,8 @@ class Character < ActiveRecord::Base
   end
 
   def class_levels(class_id)
-    self.levels.where(class_id: class_id).size
+    offset = (self.base_level.class_id == class_id ? 1 : 0)
+    self.levels.where(class_id: class_id).size - offset
   end
 
   private

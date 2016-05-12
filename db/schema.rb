@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511191025) do
+ActiveRecord::Schema.define(version: 20160512220545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20160511191025) do
   end
 
   create_table "races", force: :cascade do |t|
-    t.string   "plural"
+    t.string   "name"
     t.string   "singular"
     t.string   "adjective"
     t.integer  "age_of_maturity"
