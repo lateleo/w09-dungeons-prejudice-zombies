@@ -1,6 +1,8 @@
 require File.expand_path('../../helpers/application_helper', __FILE__)
 
 class RacialBonus < ActiveRecord::Base
+  include ApplicationHelper
+
   validates_with UniversalValidator
   validates :race_id, presence: true
   validates :cooldown, presence: true

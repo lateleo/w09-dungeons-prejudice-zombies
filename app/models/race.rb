@@ -1,6 +1,8 @@
 require File.expand_path('../../helpers/application_helper', __FILE__)
 
 class Race < ActiveRecord::Base
+  include ApplicationHelper
+
   validates_with UniversalValidator
   validates :singular, presence: true
   validates :adjective, presence: true

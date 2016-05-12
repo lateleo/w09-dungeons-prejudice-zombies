@@ -1,6 +1,8 @@
 require File.expand_path('../../helpers/application_helper', __FILE__)
 
 class Character < ActiveRecord::Base
+  include ApplicationHelper
+  
   validates_with UniversalValidator
   validates :age, presence: true
   validates :player_id, presence: true

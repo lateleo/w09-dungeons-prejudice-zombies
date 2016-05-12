@@ -1,7 +1,9 @@
 require File.expand_path('../../helpers/application_helper', __FILE__)
 
 class Ability < ActiveRecord::Base
-  #validates_with UniversalValidator
+  include ApplicationHelper
+
+  validates_with UniversalValidator
   validates :cooldown, presence: true
   validates :in_game_effect, presence: true
 
