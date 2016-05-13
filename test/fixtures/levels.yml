@@ -57,16 +57,30 @@ three:
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"
 
-# false:
-#   id: 4
-#   character_id: 1
-#   class_id: 3
-#   character_level: 3
-#   ability_id: 4
-#   fortitude_increase: 0
-#   strength_increase: 2
-#   mana_increase: 2
-#   swiftness_increase: 1
-#   intuition_increase: 0
-#   created_at: "2016-05-12 22:16:59"
-#   updated_at: "2016-05-12 22:16:59"
+darren_zero:
+  id: 5
+  character_id: 2
+  character_level: 0
+  class_id: 1
+  ability_id: 1
+  fortitude_increase: 12
+  strength_increase: 14
+  mana_increase: 13
+  swiftness_increase: 11
+  intuition_increase: 10
+  created_at: "2016-05-12 22:16:59"
+  updated_at: "2016-05-12 22:16:59"
+
+darren_one:
+  id: 6
+  character_id: 2
+  character_level: 1
+  class_id: 1
+  ability_id: 2
+  fortitude_increase: 0
+  strength_increase: 0
+  mana_increase: 0
+  swiftness_increase: 0
+  intuition_increase: 0
+  created_at: "2016-05-12 22:16:59"
+  updated_at: "2016-05-12 22:16:59"

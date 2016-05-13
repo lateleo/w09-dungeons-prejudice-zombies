@@ -1,20 +1,19 @@
-require File.expand_path('../../helpers/application_helper', __FILE__)
-
 class RacialBonus < ActiveRecord::Base
   include ApplicationHelper
 
   validates_with UniversalValidator
-  validates :race_id, presence: true
   validates :cooldown, presence: true
   validates :in_game_effect, presence: true
-  validate :validate_race_id
+  validate :validate_race
 
   belongs_to :race
   has_many :characters
 
-  def validate_race_id
-    unless self.race
-      errors.add(:racial_id, "must correspond to the id of a Race that exists.")
+  def validate_race
+    if self.race_id == nil
+      errors.add(:race_id, "cannot be blank.")
+    elsif !self.race
+      errors.add(:race, "does not exist.")
     end
   end
 

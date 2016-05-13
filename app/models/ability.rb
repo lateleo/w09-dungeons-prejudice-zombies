@@ -1,5 +1,3 @@
-require File.expand_path('../../helpers/application_helper', __FILE__)
-
 class Ability < ActiveRecord::Base
   include ApplicationHelper
 

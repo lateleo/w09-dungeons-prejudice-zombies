@@ -1,89 +1,81 @@
 require "pry"
 class Level < ActiveRecord::Base
   include ApplicationHelper
+  extend ApplicationHelper
 
   validates :character_level, presence: true, numericality: {greater_than_or_equal_to: 0},
     uniqueness: {scope: :character_id}
   validates :ability_id, uniqueness: {scope: :character_id}
   validate :validate_increases
-  validate :validate_character_id
-  validate :validate_class_id
-  validate :validate_ability_id
+  validate :validate_foreign_keys
 
   belongs_to :character
   belongs_to :char_class, class_name: "CharacterClass", foreign_key: "class_id"
   belongs_to :ability
 
+  def validate_foreign_keys
+    {"character" => "character_id", "ability" => "ability_id", "char_class" => "class_id"}.each do |model, id|
+      if self.send(id) == nil
+        errors.add(:"#{id}", "cannot be blank.")
+      elsif !self.send(model)
+        errors.add(:"#{model}", "does not exist.")
+      end
+    end
+    is_class_permitted? if self.character && self.char_level && self.char_class
+  end
+
+  def is_class_permitted?
+    if self.char_level == 0 && self.char_class.prestige
+      errors.add(:char_class, "cannot be a prestige class.")
+    elsif self.char_level == 1 && self.class_id != self.character.base_class_id
+      errors.add(:char_class, "must match the character's base class.")
+    elsif self.char_level >= 2 && !self.char_class.prestige && self.class_id != self.character.base_class_id
+      errors.add(:char_class, "cannot be a base class other than the character's base class.")
+    end
+  end
+
   def validate_increases
-    check_stats_for_nil_or_0
+    if stats.any? {|stat| self.send("#{stat}_increase") == nil}
+      errors.add(:"stat_increases", "cannot be blank.")
+    elsif stats.any? {|stat| self.send("#{stat}_increase") < 0}
+      errors.add(:"stat_increases", "must be greater than or equal to 0.")
+    elsif self.char_level && self.character && self.char_class
+      stat_sum_valid?
+      each_stat_valid? if self.char_level != 0
+    end
+  end
+
+  def stat_sum_valid?
+    expected = sum_for("racial") + (self.char_level >= 2 ? 5 : 0)
+    if self.char_level != 0 && sum_for("increase") != expected
+      errors.add(:stat_increases, "must add up to #{expected}.")
+    end
+  end
+
+  def sum_for(type)
     sum = 0
-    stats.each {|stat| sum += self.send("#{stat}_increase").to_i}
-    check_stats_for_levels_2_up(sum) if self.character_level.to_i > 1
-    if self.character_level == 1
-      errors.add(:stat_increases, "can only come from racial stat indices at level 1.") if sum != racial_increase_sum
-    end
-  end
-
-  def check_stats_for_nil_or_0
-    stats.each do |stat|
-      if self.send("#{stat}_increase") == nil
-        errors.add(:"#{stat}_increase", "cannot be blank.")
-      elsif self.send("#{stat}_increase") < 0
-        errors.add(:"#{stat}_increase", "must be greater than or equal to 0.")
-      end
-    end
-  end
-
-  def check_stats_for_levels_2_up(sum)
-    errors.add(:stat_increases, "must add up to 5.") if sum != 5 + racial_increase_sum
-    stats.each do |stat|
-      if self.send("#{stat}_increase") > self.char_class.send("#{stat}_index") + racial_increase_for(stat)
-        errors.add(:"#{stat}_increase", "cannot be greater than the class's stat index + the racial increase.")
-      end
-    end
-  end
-
-  def validate_character_id
-    if self.character_id == nil
-      errors.add(:character_id, "cannot be blank.")
-    elsif !self.character
-      errors.add(:character_id, "must correspond to an existing character.")
-    end
-  end
-
-  def validate_class_id
-    if self.class_id == nil
-      errors.add(:class_id, "cannot be blank.")
-    elsif !self.char_class
-      errors.add(:class_id, "must correspond to an existing character class.")
-    end
-  end
-
-  def validate_ability_id
-    if self.ability_id == nil
-      errors.add(:ability_id, "cannot be blank.")
-    elsif !self.ability
-      errors.add(:ability_id, "must correspond to an existing ability.")
-    end
-  end
-
-  def racial_increase_for(stat)
-    if self.character
-      increase_values = self.character.race.send(:increase_levels_for, stat)
-      adjusted_level = ((self.character_level + self.character.send("#{stat}_offset") - 1) % 15) + 1
-      increase = (increase_values.include?(adjusted_level) ? 1 : 0)
-    end
-    increase
-  end
-
-  def racial_increase_sum
-    sum = 0
-    stats.each do |stat|
-      sum += racial_increase_for(stat).to_i
-    end
+    stats.each {|stat| sum += self.send("#{stat}_#{type}")}
     sum
   end
 
+  def each_stat_valid?
+    stats.any? do |stat|
+      max = self.char_class.send("#{stat}_index") + self.send("#{stat}_racial")
+      errors.add(:"#{stat}_increase", "cannot be greater than #{max}.") if self.send("#{stat}_increase") > max
+    end
+  end
+
+  stats.each do |stat|
+    define_method(:"#{stat}_racial") do
+      increase_values = self.character.race.send(:increase_levels_for, stat)
+      adjusted_level = ((self.char_level + self.character.send("#{stat}_offset") - 1) % 15) + 1
+      increase_values.include?(adjusted_level) ? 1 : 0
+    end
+  end
+
+  def char_level
+    self.character_level
+  end
 
   private
 

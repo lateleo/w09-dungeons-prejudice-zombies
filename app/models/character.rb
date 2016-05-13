@@ -1,16 +1,13 @@
-require File.expand_path('../../helpers/application_helper', __FILE__)
-
 class Character < ActiveRecord::Base
   include ApplicationHelper
+  extend ApplicationHelper
 
   validates_with UniversalValidator
   validates :age, presence: true
-  validates :player_id, presence: true
-  validates :race_id, presence: true
-  validates :racial_bonus_id, presence: true
-  validates :base_level_id, presence: true
+  validate :validate_foreign_keys
   validate :validate_offsets
 
+  belongs_to :player, class_name: "User"
   belongs_to :race
   belongs_to :racial_bonus
 
@@ -19,44 +16,33 @@ class Character < ActiveRecord::Base
   has_many :char_classes, through: :levels, class_name: "CharacterClass"
   has_many :abilities, through: :levels
 
-  def fortitude
-    sum = 0
-    self.levels.each do |level|
-      sum += level.fortitude_increase
+  def validate_offsets
+    stats.each do |stat|
+      if self.send("#{stat}_offset") == nil
+        errors.add(:"#{stat}_offset", "cannot be blank.")
+      elsif self.send("#{stat}_offset") < 0 || self.send("#{stat}_offset") > 15
+        errors.add(:"#{stat}_offset", "must be between 0 and 15 inclusive.")
+      end
     end
-    sum
   end
 
-  def strength
-    sum = 0
-    self.levels.each do |level|
-      sum += level.strength_increase
+  def validate_foreign_keys
+    ["base_level", "player", "race", "racial_bonus"].each do |key|
+      if self.send("#{key}_id") == nil
+        errors.add(:"#{key}_id", "cannot be blank.")
+      elsif !self.send(key)
+        errors.add(:"#{key}", "does not exist.")
+      end
     end
-    sum
+    racial_matches_race?
   end
 
-  def mana
-    sum = 0
-    self.levels.each do |level|
-      sum += level.mana_increase
+  def racial_matches_race?
+    if self.race != nil && self.racial_bonus != nil
+      if self.racial_bonus.race != self.race
+        errors.add(:racial_bonus, "is not available for that Race.")
+      end
     end
-    sum
-  end
-
-  def swiftness
-    sum = 0
-    self.levels.each do |level|
-      sum += level.swiftness_increase
-    end
-    sum
-  end
-
-  def intuition
-    sum = 0
-    self.levels.each do |level|
-      sum += level.intuition_increase
-    end
-    sum
   end
 
   def char_levels
@@ -82,21 +68,17 @@ class Character < ActiveRecord::Base
   end
 
   def base_class_id
-    self.base_level.char_class_id
+    self.base_level.class_id
   end
 
-  def launch_pry
-    binding.pry
+  def calculate(stat)
+    sum = 0
+    self.levels.each {|level| sum += level.send("#{stat}_increase")}
+    sum
   end
 
-  def validate_offsets
-    stats.each do |stat|
-      if self.send("#{stat}_offset") == nil
-        errors.add(:"#{stat}_offset", "cannot be blank.")
-      elsif self.send("#{stat}_offset") < 0 || self.send("#{stat}_offset") > 15
-        errors.add(:"#{stat}_offset", "must be between 0 and 15 inclusive.")
-      end
-    end
+  stats.each do |stat|
+    define_method(:"#{stat}") {calculate(stat)}
   end
 
   private

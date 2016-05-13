@@ -1,5 +1,3 @@
-require File.expand_path('../../helpers/application_helper', __FILE__)
-
 class Race < ActiveRecord::Base
   include ApplicationHelper
 

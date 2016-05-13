@@ -1,6 +1,3 @@
-require File.expand_path('../../helpers/application_helper', __FILE__)
-require "pry"
-
 class CharacterClass < ActiveRecord::Base
   include ApplicationHelper
 
@@ -38,7 +35,7 @@ class CharacterClass < ActiveRecord::Base
       errors.add(:prestige, "can't be blank.")
     elsif self.prestige
       errors.add(:entry_requirements, "are necessary for Prestige Classes.") if self.entry_requirements == nil
-    elsif self.prestige == false
+    elsif !self.prestige
       errors.add(:entry_requirements, "are not allowed for Base Classes.") if self.entry_requirements != nil
     end
   end

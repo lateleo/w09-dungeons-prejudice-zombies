@@ -3,11 +3,15 @@ require 'test_helper'
 class CharacterTest < ActiveSupport::TestCase
   include ApplicationHelper
 
-  test "should be valid with and without backstory" do
+  test "should be valid when created normally" do
     @character = characters(:one)
-    assert(@character.valid?, "should be valid without backstory")
+    assert(@character.valid?, "should be valid without a backstory or campaign")
     @character.backstory = "Draco Rage."
-    assert(@character.valid?, "should be valid with backstory")
+    assert(@character.valid?, "should be valid with a backstory, but no campaign")
+    @character.campaign_id = 1
+    assert(@character.valid?, "should be valid with a backstory and a campaign")
+    @character.backstory = nil
+    assert(@character.valid?, "should be valid with a campaign, but no backstory")
   end
 
   test "should be invalid without a name" do
@@ -22,16 +26,20 @@ class CharacterTest < ActiveSupport::TestCase
     refute(@character.valid?, "should be invalid without an age")
   end
 
-  test "should be invalid without a race" do
+  test "should be invalid without a correct race" do
     @character = characters(:one)
     @character.race_id = nil
     refute(@character.valid?, "should be invalid without a race")
   end
 
-  test "should be invalid without a racial bonus" do
+  test "should be invalid without a correct racial_bonus" do
     @character = characters(:one)
     @character.racial_bonus_id = nil
-    refute(@character.valid?, "should be invalid without a racial bonus")
+    refute(@character.valid?, "should be invalid without a racial_bonus_id")
+    @character.racial_bonus_id = 0
+    refute(@character.valid?, "should be invalid with a nonexistent racial_bonus")
+    @character.racial_bonus_id = 3
+    refute(@character.valid?, "should be invalid with a racial_bonus for a different race")
   end
 
   test "should be invalid without a base_level" do
@@ -79,16 +87,14 @@ class CharacterTest < ActiveSupport::TestCase
   end
 
   test "should filter duplicate attributes properly" do
-    @character = characters(:one)
-    @character.save
-    @dup = @character.dup
+    @character = characters(:two)
     [:abilities, :character_classes, :characters, :races, :racial_bonuses].each do |model|
-      @dup.name = send(model, :one).name
-      refute(@dup.valid?, "should not allow a duplicate name")
-      assert(@dup.errors[:name], "should have an error under :name")
+      @character.name = send(model, :one).name
+      refute(@character.valid?, "should not allow a duplicate name")
+      assert(@character.errors[:name], "should have an error under :name")
     end
-    @dup.name = "duplicate"
-    assert(@dup.valid?, "should be valid with unique name but otherwise redundant attributes")
+    @character.name = "Darren Wingfury"
+    assert(@character.valid?, "should be valid with unique name but otherwise redundant attributes")
   end
 
 end

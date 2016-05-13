@@ -2,6 +2,7 @@ class Campaign < ActiveRecord::Base
   validates :name, presence: true
   validates :dm_id, presence: true
   validates :description, presence: true
+  validate :validate_dm
 
   # This is the association for the user that is DMing the campaign. There is
   # only one, and it is required at creation.
@@ -16,6 +17,14 @@ class Campaign < ActiveRecord::Base
     foreign_key: "player_campaign_id",
     association_foreign_key: "player_id"
   has_many :characters
+
+  def validate_dm
+    if self.dm_id == nil
+      errors.add(:dm_id, "cannot be blank.")
+    elsif !self.dungeon_master
+      errors.add(:dungeon_master, "does not exist.")
+    end
+  end
 
   private
 

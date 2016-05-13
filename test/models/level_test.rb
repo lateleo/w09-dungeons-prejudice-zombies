@@ -19,31 +19,46 @@ class LevelTest < ActiveSupport::TestCase
     @level.character_id = nil
     refute(@level.valid?, "should be invalid without a character_id")
     @level.character_id = 0
-    refute(@level.valid?, "should be invalid with a character_id with no character")
+    refute(@level.valid?, "should be invalid with a nonexistent character")
   end
 
-  test "should be invalid without a class_id" do
-    @level = levels(:one)
-    @level.class_id = nil
-    refute(@level.valid?, "should be invalid without a class_id")
-    @level.class_id = 0
-    refute(@level.valid?, "should be invalid with a class_id with no class")
+  test "should be invalid without a correct class_id" do
+    @level_0 = levels(:zero)
+    @level_0.class_id = nil
+    refute(@level_0.valid?, "should be invalid without a class_id")
+    @level_0.class_id = 0
+    refute(@level_0.valid?, "should be invalid with a nonexistent class")
+    @level_0.class_id = 2
+    refute(@level_0.valid?, "should be invalid with a class_id for a prestige class")
+    @level_0.class_id = 1
+    @level_1 = levels(:one)
+    @level_1.class_id = 3
+    refute(@level_1.valid?, "class_id for character levels 0 and 1 should match")
+    @level_1.class_id = 1
+    @level_3 = levels(:three)
+    @level_3.class_id = 3
+    refute(@level_3.valid?, "should be invalid with a class_id for a different base class than level 0")
   end
 
-  test "should be invalid without a ability_id" do
+  test "should be invalid without a correct ability_id" do
     @level = levels(:one)
     @level.ability_id = nil
-    refute(@level.valid?, "should be invalid without a ability_id")
+    refute(@level.valid?, "should be invalid without an ability_id")
     @level.ability_id = 0
-    refute(@level.valid?, "should be invalid with a ability_id with no class")
+    refute(@level.valid?, "should be invalid with a nonexistent ability")
+    @level.ability_id = 1
+    refute(@level.valid?, "should be invalid with a duplicate ability_id for that character")
   end
 
-  test "should be invalid without a character_level" do
+  test "should be invalid without a correct character_level" do
     @level = levels(:one)
     @level.character_level = nil
     refute(@level.valid?, "should be invalid without a character_level")
     @level.character_level = -1
     refute(@level.valid?, "should be invalid with a character_level of -1")
+    @level = levels(:three)
+    @level.character_level = 2
+    refute(@level.valid?, "should be invalid with a duplicate character_level for that character")
   end
 
   test "should require stat increases to be correct" do
