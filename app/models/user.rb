@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
   validates :email, presence: true, uniqueness: {case_sensitive: false}
+  validates :name, presence: true, uniqueness: true
 
   # The association for the campaigns that a user is the DM for.
   has_many :dm_campaigns, class_name: "Campaign", foreign_key: "dm_id"
