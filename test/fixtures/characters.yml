@@ -1,35 +1,30 @@
 # # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 #
-one:
-  id: 1
+tyrion:
   name: "Tyrion Wingfury"
   age: 18
-  race_id: 1
-  racial_bonus_id: 1
-  base_level_id: 1
+  race: humans
+  racial_bonus: sheer_luck
   fortitude_offset: 1
   strength_offset: 1
   mana_offset: 1
   swiftness_offset: 1
   intuition_offset: 1
-  campaign_id: 1
-  player_id: 1
+  player: art
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"
 
-two:
-  id: 2
+
+darren:
   name: "Darren Wingfury"
   age: 21
-  race_id: 1
-  racial_bonus_id: 1
-  base_level_id: 5
+  race: humans
+  racial_bonus: sheer_luck
   fortitude_offset: 0
   strength_offset: 0
   mana_offset: 0
   swiftness_offset: 0
   intuition_offset: 0
-  campaign_id: 1
-  player_id: 1
+  player: art
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"

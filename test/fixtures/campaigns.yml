@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+sea:
   name: "Sea Campaign"
-  dm_id: 2
+  dungeon_master: rudolph
   description: "A group of privateers having various adventures, much to the chagrin of several evil deities."
 
-two:
+cormyr:
   name: "Cormyr Campaign"
   dm_id: 3
   description: "A trio of adventurers investigate a reports of a growing cult presence."

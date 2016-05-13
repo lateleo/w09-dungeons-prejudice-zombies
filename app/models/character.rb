@@ -8,10 +8,10 @@ class Character < ActiveRecord::Base
   validate :validate_offsets
 
   belongs_to :player, class_name: "User"
+  belongs_to :campaign
   belongs_to :race
   belongs_to :racial_bonus
 
-  has_one :base_level, class_name: "Level"
   has_many :levels
   has_many :char_classes, through: :levels, class_name: "CharacterClass"
   has_many :abilities, through: :levels
@@ -49,18 +49,26 @@ class Character < ActiveRecord::Base
     self.levels.size - 1
   end
 
-  def class_levels(class_id)
-    offset = (self.base_level.class_id == class_id ? 1 : 0)
-    self.levels.where(class_id: class_id).size - offset
+  def class_levels(char_class_id)
+    offset = (self.base_class_id == char_class_id ? 1 : 0)
+    self.levels.where(char_class_id: char_class_id).size - offset
   end
 
   def char_classes
-    classes = []
-    self.levels.each do |l|
-      char_class = CharacterClass.find(l.class_id)
-      classes.push(char_class) if !classes.include?(char_class)
+    char_classes = []
+    self.levels.each do |level|
+      char_class = CharacterClass.find(level.char_class_id)
+      char_classes.push(char_class) if !char_classes.include?(char_class)
     end
-    classes
+    char_classes
+  end
+
+  def base_level
+    self.levels.find_by(character_level: 0)
+  end
+
+  def base_level_id
+    self.base_level.id
   end
 
   def base_class
@@ -68,7 +76,7 @@ class Character < ActiveRecord::Base
   end
 
   def base_class_id
-    self.base_level.class_id
+    self.base_level.char_class_id
   end
 
   def calculate(stat)

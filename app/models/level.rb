@@ -10,15 +10,15 @@ class Level < ActiveRecord::Base
   validate :validate_foreign_keys
 
   belongs_to :character
-  belongs_to :char_class, class_name: "CharacterClass", foreign_key: "class_id"
+  belongs_to :char_class, class_name: "CharacterClass"
   belongs_to :ability
 
   def validate_foreign_keys
-    {"character" => "character_id", "ability" => "ability_id", "char_class" => "class_id"}.each do |model, id|
-      if self.send(id) == nil
-        errors.add(:"#{id}", "cannot be blank.")
-      elsif !self.send(model)
-        errors.add(:"#{model}", "does not exist.")
+    ["character", "ability", "char_class"].each do |key|
+      if self.send("#{key}_id") == nil
+        errors.add(:"#{key}_id", "cannot be blank.")
+      elsif !self.send(key)
+        errors.add(:"#{key}", "does not exist.")
       end
     end
     is_class_permitted? if self.character && self.char_level && self.char_class
@@ -27,9 +27,9 @@ class Level < ActiveRecord::Base
   def is_class_permitted?
     if self.char_level == 0 && self.char_class.prestige
       errors.add(:char_class, "cannot be a prestige class.")
-    elsif self.char_level == 1 && self.class_id != self.character.base_class_id
+    elsif self.char_level == 1 && self.char_class_id != self.character.base_class_id
       errors.add(:char_class, "must match the character's base class.")
-    elsif self.char_level >= 2 && !self.char_class.prestige && self.class_id != self.character.base_class_id
+    elsif self.char_level >= 2 && !self.char_class.prestige && self.char_class_id != self.character.base_class_id
       errors.add(:char_class, "cannot be a base class other than the character's base class.")
     end
   end
@@ -80,7 +80,7 @@ class Level < ActiveRecord::Base
   private
 
   def level_params
-    params.require(:level).permit(:character_id, :class_id, :character_level,
+    params.require(:level).permit(:character_id, :char_class_id, :character_level,
       :ability_id, :fortitude_increase, :strength_increase, :mana_increase,
       :swiftness_increase, :intuition_increase)
   end

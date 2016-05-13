@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  id: 1
+humans:
   name: "Humans"
   singular: "Human"
   adjective: "Human"
@@ -15,8 +14,7 @@ one:
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"
 
-two:
-  id: 2
+elves:
   name: "Elves"
   singular: "Elf"
   adjective: "Elven"

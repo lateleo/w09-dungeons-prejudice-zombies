@@ -3,18 +3,18 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   test "should be valid when created normally" do
-    @user = users(:one)
+    @user = users(:art)
     assert(@user.valid?, "should be valid")
   end
 
   test "should be invalid without email" do
-    @user = users(:one)
+    @user = users(:art)
     @user.email = nil
     refute(@user.valid?, "should be invalid without email")
   end
 
   test "should be invalid without name" do
-    @user = users(:one)
+    @user = users(:art)
     @user.name = nil
     refute(@user.valid?, "should be invalid without name")
   end

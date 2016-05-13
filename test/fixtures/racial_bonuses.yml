@@ -1,29 +1,26 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  id: 1
+sheer_luck:
+  race: humans
   name: "Sheer Luck"
-  race_id: 1
   cooldown: "1 day"
   in_game_effect: "Pick any die roll that affects you, roll it twice, and choose one as the result."
   flavor_text: nil
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"
 
-two:
-  id: 2
+xenophoia:
+  race: humans
   name: "Xenophobia"
-  race_id: 1
   cooldown: "passive"
   in_game_effect: "Deal more damage to, but recieve less healing from other races."
   flavor_text: nil
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"
 
-three:
-  id: 3
+sprint:
+  race: elves
   name: "Sprint"
-  race_id: 2
   cooldown: "1 day"
   in_game_effect: "Increases movement speed and damage taken, but decreases damage dealt for a brief period."
   flavor_text: nil

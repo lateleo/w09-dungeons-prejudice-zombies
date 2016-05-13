@@ -73,12 +73,11 @@ ActiveRecord::Schema.define(version: 20160512220545) do
     t.text     "backstory"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.integer  "base_level_id"
   end
 
   create_table "levels", force: :cascade do |t|
     t.integer  "character_id"
-    t.integer  "class_id"
+    t.integer  "char_class_id"
     t.integer  "character_level"
     t.integer  "ability_id"
     t.integer  "fortitude_increase"

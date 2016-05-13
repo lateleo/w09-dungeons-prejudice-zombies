@@ -1,7 +1,6 @@
-# # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 #
-one:
-  id: 1
+paladin:
   name: "Paladin"
   armor_type: "Heavy"
   fortitude_index: 1
@@ -15,8 +14,7 @@ one:
 
 
 
-two:
-  id: 2
+vanguard:
   name: "Vanguard"
   armor_type: "Medium"
   fortitude_index: 0
@@ -30,8 +28,7 @@ two:
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"
 
-three:
-  id: 3
+mage:
   name: "Mage"
   armor_type: "Light"
   fortitude_index: 0

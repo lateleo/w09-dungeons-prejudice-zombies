@@ -1,11 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-zero:
-  id: 1
-  character_id: 1
-  class_id: 1
+tyrion_zero:
+  character: tyrion
+  char_class: paladin
   character_level: 0
-  ability_id: 1
+  ability: crusader_strike
   fortitude_increase: 12
   strength_increase: 14
   mana_increase: 13
@@ -15,12 +14,11 @@ zero:
   updated_at: "2016-05-12 22:16:59"
 
 
-one:
-  id: 2
-  character_id: 1
-  class_id: 1
+tyrion_one:
+  character: tyrion
+  char_class: paladin
   character_level: 1
-  ability_id: 2
+  ability: smite
   fortitude_increase: 0
   strength_increase: 0
   mana_increase: 0
@@ -29,12 +27,11 @@ one:
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"
 
-two:
-  id: 3
-  character_id: 1
-  class_id: 1
+tyrion_two:
+  character: tyrion
+  char_class: paladin
   character_level: 2
-  ability_id: 3
+  ability: zeal
   fortitude_increase: 1
   strength_increase: 4
   mana_increase: 3
@@ -43,12 +40,11 @@ two:
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"
 
-three:
-  id: 4
-  character_id: 1
-  class_id: 2
+tyrion_three:
+  character: tyrion
+  char_class: vanguard
   character_level: 3
-  ability_id: 4
+  ability: charge
   fortitude_increase: 0
   strength_increase: 2
   mana_increase: 2
@@ -58,11 +54,10 @@ three:
   updated_at: "2016-05-12 22:16:59"
 
 darren_zero:
-  id: 5
-  character_id: 2
+  character: darren
   character_level: 0
-  class_id: 1
-  ability_id: 1
+  char_class: paladin
+  ability: crusader_strike
   fortitude_increase: 12
   strength_increase: 14
   mana_increase: 13
@@ -72,11 +67,10 @@ darren_zero:
   updated_at: "2016-05-12 22:16:59"
 
 darren_one:
-  id: 6
-  character_id: 2
+  character: darren
   character_level: 1
-  class_id: 1
-  ability_id: 2
+  char_class: paladin
+  ability: smite
   fortitude_increase: 0
   strength_increase: 0
   mana_increase: 0
