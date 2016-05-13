@@ -13,16 +13,20 @@ class Race < ActiveRecord::Base
   has_many :characters
 
   def validate_indices
-    sum = 0
     stats.each do |stat|
-      sum += self.send("#{stat}_index").to_i
-      if self.send("#{stat}_index") == nil
-        errors.add(:"#{stat}_index", "cannot be blank.")
-      elsif self.send("#{stat}_index") >= 3 || self.send("#{stat}_index") <= -3
+      errors.add(:"#{stat}_index", "cannot be blank.") if self.send("#{stat}_index") == nil
+      if self.send("#{stat}_index") >= 3 || self.send("#{stat}_index") <= -3
         errors.add(:"#{stat}_index", "must be between -3 and 3 inclusive.")
       end
     end
-    errors.add(:stat_indices, "must add up to 8.") if sum != 0
+  end
+
+  def check_index_sum
+    sum = 0
+    stats.each do |stat|
+      sum += self.send("#{stat}_index").to_i
+    end
+    errors.add(:stat_indices, "must add up to 0.") if sum != 0
   end
 
   def set_adjective

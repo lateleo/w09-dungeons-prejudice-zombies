@@ -15,14 +15,19 @@ class CharacterClass < ActiveRecord::Base
   has_many :characters, through: :levels
 
   def validate_indices
+    check_index_sum
+    stats.each do |stat|
+      errors.add(:"#{stat}_index", "cannot be blank.") if self.send("#{stat}_index") == nil
+      if self.send("#{stat}_index") > 4 || self.send("#{stat}_index") < 0
+        errors.add(:"#{stat}_index", "must be between 0 and 4 inclusive.")
+      end
+    end
+  end
+
+  def check_index_sum
     sum = 0
     stats.each do |stat|
       sum += self.send("#{stat}_index").to_i
-      if self.send("#{stat}_index") == nil
-        errors.add(:"#{stat}_index", "cannot be blank.")
-      elsif self.send("#{stat}_index") > 4 || self.send("#{stat}_index") < 0
-        errors.add(:"#{stat}_index", "must be between 0 and 4 inclusive.")
-      end
     end
     errors.add(:stat_indices, "must add up to 8.") if sum != 8
   end
