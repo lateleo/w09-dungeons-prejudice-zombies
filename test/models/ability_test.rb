@@ -40,6 +40,4 @@ class AbilityTest < ActiveSupport::TestCase
     assert(@dup.valid?, "should be valid with unique name but otherwise redundant attributes")
   end
 
-
-
 end

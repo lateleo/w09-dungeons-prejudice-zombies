@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class CharacterClassTest < ActiveSupport::TestCase
-
   include ApplicationHelper
 
   test "should be valid with and without description" do

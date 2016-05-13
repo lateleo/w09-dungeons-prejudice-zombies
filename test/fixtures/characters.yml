@@ -1,10 +1,12 @@
 # # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 #
 one:
+  id: 1
   name: "Tyrion Wingfury"
   age: 18
   race_id: 1
   racial_bonus_id: 1
+  base_level_id: 1
   fortitude_offset: 1
   strength_offset: 1
   mana_offset: 1
