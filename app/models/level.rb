@@ -22,6 +22,7 @@ class Level < ActiveRecord::Base
       end
     end
     is_class_permitted? if self.character && self.char_level && self.char_class
+    is_ability_permitted? if self.character && self.ability && self.char_class
   end
 
   def is_class_permitted?
@@ -30,7 +31,15 @@ class Level < ActiveRecord::Base
     elsif self.char_level == 1 && self.char_class_id != self.character.base_class_id
       errors.add(:char_class, "must match the character's base class.")
     elsif self.char_level >= 2 && !self.char_class.prestige && self.char_class_id != self.character.base_class_id
-      errors.add(:char_class, "cannot be a base class other than the character's base class.")
+      errors.add(:char_class, "cannot be a base class other than #{self.character.base_class.name}.")
+    end
+  end
+
+  def is_ability_permitted?
+    if !self.char_class.abilities.include?(self.ability)
+      errors.add(:ability, "must be available for #{self.char_class.name}.")
+    elsif self.character.levels.any? {|level| level != self && level.ability == self.ability}
+      errors.add(:ability, "must not have already been learned by #{self.character.name}.")
     end
   end
 

@@ -11,6 +11,7 @@ paladin:
   prestige: false
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"
+  abilities: crusader_strike, smite, zeal
 
 
 
@@ -27,6 +28,7 @@ vanguard:
   flavor_text: nil
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"
+  abilities: zeal, charge
 
 mage:
   name: "Mage"
@@ -39,3 +41,4 @@ mage:
   prestige: false
   created_at: "2016-05-12 22:16:59"
   updated_at: "2016-05-12 22:16:59"
+  abilities: fireball
