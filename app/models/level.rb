@@ -26,8 +26,11 @@ class Level < ActiveRecord::Base
 
   def check_stats_for_nil_or_0
     stats.each do |stat|
-      errors.add(:"#{stat}_increase", "cannot be blank.") if self.send("#{stat}_increase") == nil
-      errors.add(:"#{stat}_increase", "must be greater than or equal to 0.") if self.send("#{stat}_increase") < 0
+      if self.send("#{stat}_increase") == nil
+        errors.add(:"#{stat}_increase", "cannot be blank.")
+      elsif self.send("#{stat}_increase") < 0
+        errors.add(:"#{stat}_increase", "must be greater than or equal to 0.")
+      end
     end
   end
 

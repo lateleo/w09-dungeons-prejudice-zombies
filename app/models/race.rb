@@ -13,9 +13,11 @@ class Race < ActiveRecord::Base
   has_many :characters
 
   def validate_indices
+    check_index_sum
     stats.each do |stat|
-      errors.add(:"#{stat}_index", "cannot be blank.") if self.send("#{stat}_index") == nil
-      if self.send("#{stat}_index") >= 3 || self.send("#{stat}_index") <= -3
+      if self.send("#{stat}_index") == nil
+        errors.add(:"#{stat}_index", "cannot be blank.")
+      elsif self.send("#{stat}_index") >= 3 || self.send("#{stat}_index") <= -3
         errors.add(:"#{stat}_index", "must be between -3 and 3 inclusive.")
       end
     end
