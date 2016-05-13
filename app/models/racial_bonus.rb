@@ -7,9 +7,16 @@ class RacialBonus < ActiveRecord::Base
   validates :race_id, presence: true
   validates :cooldown, presence: true
   validates :in_game_effect, presence: true
+  validate :validate_race_id
 
   belongs_to :race
   has_many :characters
+
+  def validate_race_id
+    unless self.race
+      errors.add(:racial_id, "must correspond to the id of a Race that exists.")
+    end
+  end
 
   private
 

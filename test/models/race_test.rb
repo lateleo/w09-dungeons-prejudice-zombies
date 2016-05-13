@@ -70,8 +70,4 @@ class RaceTest < ActiveSupport::TestCase
     assert_equal([5,10,15], @race.increase_levels_for("mana"), "array should match the values for -3")
   end
 
-
-
-
-
 end
