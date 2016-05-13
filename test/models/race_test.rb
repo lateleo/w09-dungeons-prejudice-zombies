@@ -45,11 +45,13 @@ class RaceTest < ActiveSupport::TestCase
       refute(@race.valid?, "should be invalid with a nil stat index")
       @race.send("#{stat}_index=", 1)
       refute(@race.valid?, "should be invalid with a stat index sum of 1")
+      @race.send("#{stat}_index=", -1)
+      refute(@race.valid?, "should be invalid with a stat index sum of -1")
       @race.send("#{stat}_index=", 0)
     end
-    @race.mana_index = 4
-    @race.strength_index = -4
-    refute(@race.valid?, "should be invalid with stats outside of -3 to 3")
+    @race.mana_index = 5
+    @race.strength_index = 2
+    refute(@race.valid?, "should be invalid with stats outside of 0 to 4")
   end
 
   test "increase_levels gives proper results" do
@@ -68,6 +70,19 @@ class RaceTest < ActiveSupport::TestCase
     assert_equal([4,8,12,15], @race.increase_levels_for("mana"), "array should match the values for -2")
     @race.mana_index = -3
     assert_equal([5,10,15], @race.increase_levels_for("mana"), "array should match the values for -3")
+  end
+
+  test "should filter duplicate attributes properly" do
+    @race = races(:one)
+    @race.save
+    @dup = @race.dup
+    [:abilities, :character_classes, :characters, :races, :racial_bonuses].each do |model|
+      @dup.name = send(model, :one).name
+      refute(@dup.valid?, "should not allow a duplicate name")
+      assert(@dup.errors[:name], "should have an error under :name")
+    end
+    @dup.name = "duplicate"
+    assert(@dup.valid?, "should be valid with unique name but otherwise redundant attributes")
   end
 
 end

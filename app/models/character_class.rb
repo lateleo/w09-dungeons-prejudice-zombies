@@ -1,13 +1,14 @@
 require File.expand_path('../../helpers/application_helper', __FILE__)
+require "pry"
 
 class CharacterClass < ActiveRecord::Base
   include ApplicationHelper
 
   validates_with UniversalValidator
   validates :armor_type, presence: true
-  validates :prestige, presence: true
   validate :validate_indices
-  validate :validate_entry_reqs
+  validate :validate_prestige
+
 
   has_and_belongs_to_many :abilities
   has_many :levels, inverse_of: :char_class, foreign_key: "class_id"
@@ -19,18 +20,20 @@ class CharacterClass < ActiveRecord::Base
       sum += self.send("#{stat}_index").to_i
       if self.send("#{stat}_index") == nil
         errors.add(:"#{stat}_index", "cannot be blank.")
-      elsif self.send("#{stat}_index") >= 4 || self.send("#{stat}_index") <= 0
-        erros.add(:"#{stat}_index", "must be between 0 and 4 inclusive.")
+      elsif self.send("#{stat}_index") > 4 || self.send("#{stat}_index") < 0
+        errors.add(:"#{stat}_index", "must be between 0 and 4 inclusive.")
       end
     end
     errors.add(:stat_indices, "must add up to 8.") if sum != 8
   end
 
-  def validate_entry_reqs
-    if self.prestige && self.entry_reqs == nil
-      errors.add(:entry_requirements, "are necessary for Prestige Classes.")
-    elsif !self.prestige && self.entry_reqs != nil
-      errors.add(:entry_requirements, "are not allowed for Base Classes.")
+  def validate_prestige
+    if self.prestige == nil
+      errors.add(:prestige, "can't be blank.")
+    elsif self.prestige
+      errors.add(:entry_requirements, "are necessary for Prestige Classes.") if self.entry_requirements == nil
+    elsif self.prestige == false
+      errors.add(:entry_requirements, "are not allowed for Base Classes.") if self.entry_requirements != nil
     end
   end
 
