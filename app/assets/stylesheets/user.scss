@@ -1,3 +1,71 @@
 // Place all the styles related to the User controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$dark-red: #731111;
+$hover-red: #8C1515;
+$btn-text: #d9d9d9;
+$page-background: #DBCFA9;
+$page-margin: #212121;
+
+.btn, .btn-large {
+  background-color: $dark-red;
+  color: $btn-text;
+}
+
+.btn:hover, .btn-large:hover {
+  background-color: $hover-red;
+}
+
+html {
+  background-color:$page-margin;
+  font-family: 'Crimson Text', serif;
+}
+
+.window {
+
+}
+
+.back-screen {
+  background-color: $page-background;
+  opacity: 0.75;
+  z-index: -1;
+}
+
+.img-back {
+  z-index: -2;
+  width: inherit;
+  height: inherit;
+}
+
+.container, .img-back, .back-screen {
+  min-height: 99%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 5%;
+  margin-right: 5%;
+  max-width: 1280px;
+  width: 90%;
+  position: fixed;
+}
+
+.container .row {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (min-width: 601px) {
+  .container, .img-back, .back-screen {
+    margin-right: 7%;
+    margin-left: 8%;
+    width: 85%;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .container, .img-back, .back-screen {
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+  }
+}

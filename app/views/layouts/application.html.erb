@@ -4,19 +4,20 @@
   <title>W09DungeonsPrejudiceZombies</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='https://fonts.googleapis.com/css?family=Crimson+Text:400,700,400italic' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if current_user %>
-    <p>Logged in as <%= current_user.name %></p>
-    <p><%= link_to "Logout", logout_path %></p>
-  <% else %>
-    <p>Not logged in</p>
-    <p><%= link_to "Login", login_path %></p>
-  <% end %>
+<img src="http://www.myfreetextures.com/wp-content/uploads/2011/06/grungy-rough-old-worn-parchment-paper.jpg" class="img-back">
+<div class="back-screen"></div>
+<div class="container">
+  <div class="login-logout">
+    <% if current_user %>
+      <p>Logged in as <%= current_user.name %> - <%= link_to "Logout", logout_path %></p>
+    <% end %>
+  </div>
 
-
-<%= yield %>
-
+  <%= yield %>
+</div>
 </body>
 </html>
